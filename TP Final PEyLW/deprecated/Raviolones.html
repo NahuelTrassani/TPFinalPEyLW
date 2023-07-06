@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pimienta & Orégano</title>
+  <link rel="stylesheet" type="text/css" href="Estilo.css">
+
+  <script>
+    var productosSeleccionados = []; // Colección para mantener los productos seleccionados
+    document.addEventListener('DOMContentLoaded', function () {
+      var carrito = obtenerCarrito();
+
+      // Realiza acciones con el carrito obtenido
+
+      console.log(carrito); // Ejemplo: Imprimir el carrito en la consola
+
+      // Resto del código de la página...
+    });
+
+    function obtenerCarrito() {
+      var carritoJSON = localStorage.getItem('carrito');
+      if (carritoJSON) {
+        return JSON.parse(carritoJSON);
+      } else {
+        return { items: [] };
+      }
+    }
+
+
+    function obtenerCarritoDesdeJSON(carritoJSON) {
+      // Convertir el JSON en un objeto JavaScript
+      var carrito = JSON.parse(carritoJSON);
+
+      return carrito;
+    }
+
+    function mostrarCarrito() {
+      var carrito = obtenerCarritoDesdeJSON(); // Obtener el carrito desde JSON
+
+      var carritoHTML = '';
+
+      for (var i = 0; i < carrito.items.length; i++) {
+        var item = carrito.items[i];
+        carritoHTML += '<div>' + item.nombre + ' - $' + item.precio + ' - Cantidad: ' + item.cantidad + '</div>';
+      }
+
+      // Agregar el HTML generado al elemento deseado en la página
+      document.getElementById('carrito-container').innerHTML = carritoHTML;
+    }
+
+    function agregarAlCarritoJSON() {
+      var carrito = obtenerCarritoDesdeJSON(); // Obtener el carrito desde JSON
+
+      for (var i = 0; i < productosSeleccionados.length; i++) {
+        var producto = productosSeleccionados[i];
+
+        var item = {
+          nombre: producto.nombre,
+          precio: producto.precio,
+          cantidad: 1
+        };
+
+        carrito.items.push(item);
+        guardarCarrito(carrito);
+      }
+
+      // Actualizar el carrito en la página con los productos seleccionados
+      mostrarCarrito();
+
+      // Limpiar la colección de productos seleccionados para futuras selecciones
+      productosSeleccionados = [];
+    }
+
+    function toggleSeleccion(idImagen, nombre, precio) {
+      var imagen = document.getElementById(idImagen);
+      var index = productosSeleccionados.findIndex(function (producto) {
+        return producto.id === idImagen;
+      });
+
+      if (index === -1) {
+        // El producto no está en la colección, agregarlo
+        productosSeleccionados.push({
+          id: idImagen,
+          nombre: nombre,
+          precio: precio
+        });
+        imagen.classList.add("selected");
+      } else {
+        // El producto está en la colección, eliminarlo
+        productosSeleccionados.splice(index, 1);
+        imagen.classList.remove("selected");
+      }
+      // Mostrar los productos seleccionados actualizados
+      mostrarSeleccionados();
+    }
+
+    function agregarSeleccionadosAlCarrito() {
+      agregarAlCarritoJSON();
+    }
+
+    function mostrarSeleccionados() {
+      var seleccionadosHTML = '';
+
+      for (var i = 0; i < productosSeleccionados.length; i++) {
+        var producto = productosSeleccionados[i];
+
+        seleccionadosHTML += '<div>' + producto.nombre + ' - $' + producto.precio + '</div>';
+      }
+
+      // Actualizar el contenedor con los productos seleccionados
+      document.getElementById('seleccionados-container').innerHTML = seleccionadosHTML;
+
+      var notification = document.querySelector('.notification');
+      if (productosSeleccionados.length > 0) {
+        notification.style.display = 'block';
+        notification.innerText = productosSeleccionados.length;
+      } else {
+        notification.style.display = 'none';
+      }
+    }
+
+    function guardarCarrito(carrito) {
+      var carritoJSON = JSON.stringify(carrito);
+      localStorage.setItem('carrito', carritoJSON);
+    }
+
+
+  </script>
+
+</head>
+
+<body>
+  <div id="header">
+    <div id="logo">
+      <h1><a href="#">Pimienta & Orégano</a></h1>
+      <h2><a href="#">Fábrica de pastas rellenas</a></h2>
+    </div>
+  </div>
+  <div id="menu">
+    <ul>
+      <li><a href="index.html" onclick="saludar()">Galeria</a></li> <!-- href="Galeria.html" -->
+      <li><a href="Raviolones.html">Raviolones</a></li>
+      <li><a href="Sorrentinos.html">Sorrentinos</a></li>
+      <li><a href="Capellettis.html">Capellettis</a></li>
+      <li><a href="Lasagnas.html">Lasagnas</a></li>
+      <li><a href="Canelones.html">Canelones</a></li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="box">
+      <h2>Raviolones</h2>
+      <div class="gallery">
+        <div id="carrito-container">
+          <a href="Carrito.html">
+            <button id="agregar-carrito-btn" onclick="agregarSeleccionadosAlCarrito()">
+              <img src="img/iconos/carrito/carrito-de-compras.png" alt="Agregar al carrito">
+              <span class="notification"></span>
+            </button>
+          </a>
+        </div>
+        <div class="product">
+          <img id="img1" src="img/pastas/raviolones/interior-pasta-rellena-adobe-a.jpg.webp" alt="Producto 1"
+            onclick="toggleSeleccion('img1', 'Producto 1', 105)">
+          <h3>Producto 1</h3>
+          <p class="price">$105</p>
+        </div>
+
+        <div class="product">
+          <img id="img2" src="img/pastas/raviolones/maxresdefault.jpg" alt="Producto 2"
+            onclick="toggleSeleccion('img2', 'Producto 2', 95)">
+          <h3>Producto 2</h3>
+          <p class="price">$95</p>
+        </div>
+
+
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+
+  <!--
+      <div>
+        <img src="img/LOGO 1 PNG.png" alt="Imagen del encabezado">
+        <h1>Pimienta & Orégano</h1>
+        <img src="/img/bars-solid.svg" alt="Menú" id="menu-icon">
+      </div>
+    -->
+
+  <footer>
+    <p>&copy; 2023 Tienda en línea. Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>

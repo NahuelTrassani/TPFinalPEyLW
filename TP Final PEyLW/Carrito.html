@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pimienta & Orégano</title>
+    <link rel="stylesheet" type="text/css" href="Estilo.css">
+</head>
+
+<body>
+    <div id="header">
+        <div id="logo">
+            <h1><a href="#">Pimienta & Orégano</a></h1>
+            <h2><a href="#">Fábrica de pastas rellenas</a></h2>
+        </div>
+    </div>
+    <div id="menu">
+        <ul>
+            <li><a href="index.html#galeria">Galeria</a></li>
+            <li><a href="index.html#raviolones">Raviolones</a></li>
+            <li><a href="index.html#sorrentinos">Sorrentinos</a></li>
+            <li><a href="index.html#capellettis">Capellettis</a></li>
+            <li><a href="index.html#lasagna">Lasagnas</a></li>
+            <li><a href="index.html#canelones">Canelones</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="box">
+            <h2>Carrito de compras</h2>
+            <div class="gallery">
+                <!-- aca se muestran los objetos creados en la function -->
+            </div>
+            <div id="seleccionados-container"></div>
+            <button id="confirmar-compra" onclick="confirmarCompra()">Confirmar compra</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            mostrarCarrito();
+        });
+
+        function obtenerCarrito() {
+            var productosSeleccionadosJSON = localStorage.getItem('productosSeleccionados');
+            if (productosSeleccionadosJSON) {
+                return JSON.parse(productosSeleccionadosJSON);
+            } else {
+                return [];
+            }
+        }
+
+        function mostrarCarrito() {
+            var carritoContainer = document.querySelector('.gallery');
+            var productosSeleccionados = obtenerCarrito();
+            var total = 0; // Variable para almacenar el precio total
+
+            // Limpiar el contenido existente en el carrito
+            carritoContainer.innerHTML = '';
+
+            // Generar la lista de elementos en el carrito
+            for (var i = 0; i < productosSeleccionados.length; i++) {
+                var producto = productosSeleccionados[i];
+
+                // Crear un nuevo elemento div para cada producto
+                var itemCarrito = document.createElement('div');
+                itemCarrito.classList.add('item-carrito');
+
+                // Crear los elementos de título, precio y cantidad
+                var titulo = document.createElement('h3');
+                titulo.textContent = producto.nombre;
+                titulo.style.fontSize = '18px'; // Aumentar el tamaño de la fuente del título
+
+                var precio = document.createElement('p');
+                precio.textContent = 'Precio: $' + producto.precio;
+                precio.style.fontSize = '16px'; // Aumentar el tamaño de la fuente del precio
+
+                var cantidadContainer = document.createElement('div');
+                cantidadContainer.classList.add('cantidad-container');
+
+                var cantidadMinus = document.createElement('button');
+                cantidadMinus.textContent = '-';
+                cantidadMinus.style.fontSize = '24px'; // Aumentar el tamaño de la fuente del botón de disminuir cantidad
+
+                var cantidadValue = document.createElement('span');
+                cantidadValue.textContent = producto.cantidad;
+                cantidadValue.style.fontSize = '20px'; // Aumentar el tamaño de la fuente del número de cantidad
+
+                var cantidadPlus = document.createElement('button');
+                cantidadPlus.textContent = '+';
+                cantidadPlus.style.fontSize = '24px'; // Aumentar el tamaño de la fuente del botón de aumentar cantidad
+
+                cantidadMinus.addEventListener('click', function () {
+                    if (producto.cantidad > 0) {
+                        producto.cantidad--;
+                        mostrarCarrito(); // Actualizar la vista del carrito después de modificar la cantidad
+                    }
+                });
+
+                cantidadPlus.addEventListener('click', function () {
+                    producto.cantidad++;
+                    mostrarCarrito(); // Actualizar la vista del carrito después de modificar la cantidad
+                });
+
+                // Verificar si la cantidad es cero para mostrar el símbolo de borrado
+                if (producto.cantidad === 0) {
+                    var deleteSymbol = document.createElement('span');
+                    deleteSymbol.textContent = '❌';
+                    deleteSymbol.classList.add('delete-symbol');
+                    deleteSymbol.addEventListener('click', function () {
+                        eliminarDelCarrito(producto.id);
+                        mostrarCarrito(); // Actualizar la vista del carrito después de eliminar el objeto
+                    });
+                    cantidadContainer.appendChild(deleteSymbol);
+                } else {
+                    cantidadContainer.appendChild(cantidadMinus);
+                    cantidadContainer.appendChild(cantidadValue);
+                    cantidadContainer.appendChild(cantidadPlus);
+                }
+
+                // Agregar los elementos al contenedor del producto
+                itemCarrito.appendChild(titulo);
+                itemCarrito.appendChild(precio);
+                itemCarrito.appendChild(cantidadContainer);
+
+                // Agregar el producto al carrito
+                carritoContainer.appendChild(itemCarrito);
+
+                // Calcular el precio total del producto y sumarlo al total
+                var precioTotalProducto = producto.precio * producto.cantidad;
+                total += precioTotalProducto;
+            }
+
+            // Actualizar el precio total en el contenedor correspondiente
+            var precioFinalContainer = document.getElementById('seleccionados-container');
+            precioFinalContainer.innerHTML = 'Precio final: $' + total.toFixed(2);
+        }
+
+        // Función para confirmar la compra
+        function confirmarCompra() {
+            var productosSeleccionados = []; // Vaciar la colección de productos seleccionados
+            localStorage.removeItem('productosSeleccionados'); // Eliminar el carrito del almacenamiento local
+
+            // Actualizar la vista del carrito
+            mostrarCarrito();
+
+            // Mostrar mensaje de éxito
+            alert('¡Los productos fueron comprados con éxito!');
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2023 Tienda en línea. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

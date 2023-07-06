@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pimienta & Orégano</title>
+  <link rel="stylesheet" type="text/css" href="Estilo.css">
+
+  <script>
+    //función anónima 
+    //function () {}
+    document.addEventListener('DOMContentLoaded', function () {
+      var productosSeleccionados = obtenerCarrito();
+
+      //me esta faltando marcar los seleccionados si va y vuelve del objeto html
+      for (var i = 0; i < productosSeleccionados.length; i++) {
+        var producto = productosSeleccionados[i];
+        var idImagen = producto.id;
+        var index = productosSeleccionados.findIndex(function (item) {
+          return item.id === idImagen;
+        });
+
+        var imagen = document.getElementById(idImagen);
+        if (index === -1) {
+          imagen.classList.add("selected");
+        } else {
+          imagen.classList.remove("selected");
+        }
+      }
+    });
+
+
+    var productosSeleccionados = obtenerCarrito(); // Colección para mantener los productos seleccionados
+
+    function obtenerCarrito() {
+      var productosSeleccionadosJSON = localStorage.getItem('productosSeleccionados');
+      if (productosSeleccionadosJSON) {
+        return JSON.parse(productosSeleccionadosJSON);
+      } else {
+        limpiarCarrito()
+        return [];
+      }
+    }
+
+    //selecciona una imagen.
+    function toggleSeleccion(idImagen, nombre, precio) {
+      var imagen = document.getElementById(idImagen);
+      var index = productosSeleccionados.findIndex(function (producto) {
+        return producto.id === idImagen;
+      });
+
+      if (index === -1) {
+        // El producto no está en la colección, agregarlo
+        productosSeleccionados.push({
+          id: idImagen,
+          nombre: nombre,
+          precio: precio
+        });
+        imagen.classList.add("selected");
+
+      } else {
+        // El producto está en la colección, eliminarlo
+        productosSeleccionados.splice(index, 1);
+        imagen.classList.remove("selected");
+      }
+      // Mostrar los productos seleccionados actualizados
+      notificarSeleccionados();
+      //alert(productosSeleccionados);
+      guardarProductosSeleccionados(productosSeleccionados);
+    }
+
+    //cuenta los elementos seleccionados y los muestra en la imagen del carrito
+    function notificarSeleccionados() {
+      var notification = document.querySelector('.notification');
+      if (productosSeleccionados.length > 0) {
+        notification.style.display = 'block';
+        notification.innerText = productosSeleccionados.length;
+      } else {
+        notification.style.display = 'none';
+      }
+    }
+
+    function guardarProductosSeleccionados(productosSeleccionados) {
+      var productosSeleccionadosJSON = JSON.stringify(productosSeleccionados);//lo pasa a json
+      localStorage.setItem('productosSeleccionados', productosSeleccionadosJSON);
+    }
+
+
+
+    //flotante back to top
+    window.addEventListener('scroll', toggleButtonVisibility);
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    //efecto del flotante
+    function toggleButtonVisibility() {
+      var btnScrollToTop = document.getElementById('btnScrollToTop');
+      if (window.pageYOffset > 100) {  //mas de 100px de offset sobre el eje Y activan el boton
+        btnScrollToTop.style.display = 'block';
+      } else {
+        btnScrollToTop.style.display = 'none';
+      }
+    }
+
+
+    function limpiarCarrito() {
+      var notification = document.querySelector('.notification');
+      notification.style.display = 'none';
+      productosSeleccionados = []; // Vaciar la colección de productos seleccionados
+      localStorage.removeItem('productosSeleccionados'); // Eliminar el carrito del almacenamiento local
+      notificarSeleccionados(); // Actualizar la sección de productos seleccionados
+      document.getElementById('seleccionados-container').innerHTML = "";
+    }
+  </script>
+
+</head>
+
+<body>
+  <div id="header">
+    <div id="logo">
+      <h1><a href="#">Pimienta & Orégano</a></h1>
+      <h2><a href="#">Fábrica de pastas rellenas</a></h2>
+    </div>
+  </div>
+  <div id="menu">
+    <ul>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#raviolones">Raviolones</a></li>
+      <li><a href="#sorrentinos">Sorrentinos</a></li>
+      <li><a href="#capellettis">Capellettis</a></li>
+      <li><a href="#lasagna">Lasagnas</a></li>
+      <li><a href="#canelones">Canelones</a></li>
+    </ul>
+  </div>
+  <button id="limpiar-carrito-btn" onclick="limpiarCarrito()">
+    Limpiar carrito
+  </button>
+  <div id="galeria" class="container">
+    <div class="box">
+      <h2>Galería</h2>
+      <div class="gallery">
+        <div id="carrito-container">
+          <a href="Carrito.html">
+            <button id="agregar-carrito-btn" onclick="agregarSeleccionadosAlCarrito()">
+              <img src="img/iconos/carrito/carrito-de-compras.png" alt="Agregar al carrito">
+              <span class="notification"></span>
+            </button>
+          </a>
+        </div>
+        <div class="referencia">
+          <a href="#canelones">
+            <img id="img1" src="img/pastas/galeria/canelones_98.webp" alt="Canelones">
+            <h3>Canelones</h3>
+          </a>
+        </div>
+        <div class="referencia">
+          <a href="#capellettis">
+            <img id="img2" src="img/pastas/galeria/cappe.jpg" alt="Capellettis">
+            <h3>Capellettis</h3>
+          </a>
+        </div>
+        <div class="referencia">
+          <a href="#lasagna">
+            <img id="img3" src="img/pastas/galeria/lasagnas.jpg" alt="Lasagna">
+            <h3>Lasagnas</h3>
+          </a>
+        </div>
+        <div class="referencia">
+          <a href="#raviolones">
+            <img id="img4" src="img/pastas/galeria/raviolones-mp-salmon.jpg" alt="Raviolones">
+            <h3>Raviolones</h3>
+          </a>
+        </div>
+        <div class="referencia">
+          <a href="#sorrentinos">
+            <img id="img5" src="img/pastas/galeria/sorrentinos-mp-cepresse.jpg" alt="Sorrentinos">
+            <h3>Sorrentinos</h3>
+          </a>
+        </div>
+
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+  <div id="lasagna" class="container">
+    <div class="box">
+      <h2>Lasagnas</h2>
+      <div class="gallery">
+
+        <div class="product">
+          <img id="1" src="img/pastas/lasagna/descarga (1).jpeg" alt="Producto 1"
+            onmousedown="toggleSeleccion('1', 'Lasagna de verduras', 3000)">
+          <h3>Lasagna de verduras</h3>
+          <p class="price">$3000</p>
+        </div>
+
+        <div class="product">
+          <img id="2" src="img/pastas/lasagna/lasagna-original..jpg" alt="Producto 2"
+            onmousedown="toggleSeleccion('2', 'Lasagna de carne', 3500)">
+          <h3>Lasagna de carne</h3>
+          <p class="price">$3500</p>
+        </div>
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+  <div id="canelones" class="container">
+    <div class="box">
+      <h2>Canelones</h2>
+      <div class="gallery">
+
+        <div class="product">
+          <img id="3" src="img/pastas/canelones/canelones-de-carne-2.jpg" alt="Producto 4"
+            onclick="toggleSeleccion('3', 'Canelones de carne', 2200)">
+          <h3>Canelones de carne</h3>
+          <p class="price">$2200</p>
+        </div>
+
+        <div class="product">
+          <img id="4" src="img/pastas/canelones/CANELONES-min.webp" alt="Producto 5"
+            onclick="toggleSeleccion('4', 'Canelones de pollo', 2000)">
+          <h3>Canelones de pollo</h3>
+          <p class="price">$2000</p>
+        </div>
+
+        <div class="product">
+          <img id="5" src="img/pastas/canelones/209558.avif" alt="Producto 6"
+            onclick="toggleSeleccion('5', 'Canelones de verduras', 1800)">
+          <h3>Canelones de verduras</h3>
+          <p class="price">$1800</p>
+        </div>
+
+
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+  <div id="capellettis" class="container">
+    <div class="box">
+      <h2>Capellettis</h2>
+      <div class="gallery">
+
+        <div class="product">
+          <img id="6" src="img/pastas/capellettis/capelettis.jpg" alt="Producto 7"
+            onclick="toggleSeleccion('6', 'Capellettis de carne', 1600)">
+          <h3>Capellettis de carne</h3>
+          <p class="price">$1600</p>
+        </div>
+
+        <div class="product">
+          <img id="7" src="img/pastas/capellettis/capellettis.jpg" alt="Producto 8"
+            onclick="toggleSeleccion('7', 'Capellettis de pollo', 1600)">
+          <h3>Capellettis de pollo</h3>
+          <p class="price">$1600</p>
+        </div>
+
+        <div class="product">
+          <img id="8" src="img/pastas/capellettis/D_NQ_NP_875566-MLA45374059743_032021-O.webp" alt="Producto 9"
+            onclick="toggleSeleccion('8', 'Capellettis de verduras', 1500)">
+          <h3>Capellettis de verduras</h3>
+          <p class="price">$1500</p>
+        </div>
+
+
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container">
+
+      </div>
+
+    </div>
+  </div> <!--container -->
+  <div id="raviolones" class="container">
+    <div class="box">
+      <h2>Raviolones</h2>
+      <div class="gallery">
+
+        <div class="product">
+          <img id="9" src="img/pastas/raviolones/interior-pasta-rellena-adobe-a.jpg.webp" alt="Producto 10"
+            onclick="toggleSeleccion('9', 'Raviolones de espinaca', 1700)">
+          <h3>Raviolones de espinaca</h3>
+          <p class="price">$1700</p>
+        </div>
+
+        <div class="product">
+          <img id="10" src="img/pastas/raviolones/maxresdefault.jpg" alt="Producto 11"
+            onclick="toggleSeleccion('10', 'Raviolones de muzzarrella', 1800)">
+          <h3>Raviolones de muzzarrella</h3>
+          <p class="price">$1800</p>
+        </div>
+
+
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+  <div id="sorrentinos" class="container">
+    <div class="box">
+      <h2>Sorrentinos</h2>
+      <div class="gallery">
+
+        <div class="product">
+          <img id="11" src="img/pastas/sorrentinos/descarga.jpeg" alt="Producto 12"
+            onclick="toggleSeleccion('11', 'Sorrentinos de calabaza', 1500)">
+          <h3>Sorrentinos de calabaza</h3>
+          <p class="price">$1500</p>
+        </div>
+
+        <div class="product">
+          <img id="12"
+            src="img/pastas/sorrentinos/sorrentinos-caseros-de-espinaca-y-ricota-jamon-y-muzarella-D_NQ_NP_786153-MLA28153058163_092018-F.webp"
+            alt="Producto 13" onclick="toggleSeleccion('12', 'Sorrentinos de jyq', 1600)">
+          <h3>Sorrentinos de jyq</h3>
+          <p class="price">$1800</p>
+        </div>
+
+        <div class="product">
+          <img id="13" src="img/pastas/sorrentinos/sorrentinos-de-colores-remolacha-mangiare-la-pasta-fb.jpg"
+            alt="Producto 14" onclick="toggleSeleccion('13', 'Sorrentinos de pollo', 1700)">
+          <h3>Sorrentinos de pollo</h3>
+          <p class="price">$1700</p>
+        </div>
+
+        <div class="product">
+          <img id="14" src="img/pastas/sorrentinos/sorrentinos-rellenos.jpg" alt="Producto 15"
+            onclick="toggleSeleccion('14', 'Sorrentinos de ricota', 1600)">
+          <h3>Sorrentinos de ricota</h3>
+          <p class="price">$1600</p>
+        </div>
+
+        <div class="product">
+          <img id="15" src="img/pastas/sorrentinos/sorrentinos-veganos-29-1024x683.webp" alt="Producto 16"
+            onclick="toggleSeleccion('15', 'Sorrentinos de choclo', 1700)">
+          <h3>Sorrentinos de choclo</h3>
+          <p class="price">$1700</p>
+        </div>
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+
+
+  <!--
+      <div>
+        <img src="img/LOGO 1 PNG.png" alt="Imagen del encabezado">
+        <h1>Pimienta & Orégano</h1>
+        <img src="/img/bars-solid.svg" alt="Menú" id="menu-icon">
+      </div>
+    -->
+  <button onclick="scrollToTop()" id="btnScrollToTop" title="Volver arriba">&#8593;</button>
+
+  <footer>
+    <p>&copy; 2023 Tienda en línea. Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>

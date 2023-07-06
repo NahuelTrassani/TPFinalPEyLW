@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pimienta & Orégano</title>
+  <link rel="stylesheet" type="text/css" href="Estilo.css">
+</head>
+
+<body>
+  <div id="header">
+    <div id="logo">
+      <h1><a href="#">Pimienta & Orégano</a></h1>
+      <h2><a href="#">Fábrica de pastas rellenas</a></h2>
+    </div>
+  </div>
+  <div id="menu">
+    <ul>
+      <li><a href="index.html" onclick="">Galeria</a></li> <!-- href="Galeria.html" -->
+      <li><a href="Raviolones.html">Raviolones</a></li>
+      <li><a href="Sorrentinos.html">Sorrentinos</a></li>
+      <li><a href="Capellettis.html">Capellettis</a></li>
+      <li><a href="Lasagnas.html">Lasagnas</a></li>
+      <li><a href="Canelones.html">Canelones</a></li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="box">
+      <h2>Lasagnas</h2>
+      <div class="gallery">
+        <div id="carrito-container">
+          <a href="Carrito.html">
+            <button id="agregar-carrito-btn">
+              <img src="img/iconos/carrito/carrito-de-compras.png" alt="Agregar al carrito">
+              <span class="notification"></span>
+            </button>
+          </a>
+        </div>
+        <div class="product">
+          <img id="1" src="img/pastas/lasagna/descarga (1).jpeg" alt="Producto 1"
+            onmousedown="seleccionar('1', 'Producto 1', 105)">
+          <h3>Producto 1</h3>
+          <p class="price">$105</p>
+        </div>
+
+        <div class="product">
+          <img id="2" src="img/pastas/lasagna/lasagna-original..jpg" alt="Producto 2"
+            onmousedown="seleccionar('2', 'Producto 2', 95)">
+          <h3>Producto 2</h3>
+          <p class="price">$95</p>
+        </div>
+        <div class="product">
+          <button onclick="agregarAlCarritoJSON()">agregar al carro y limpiar</button>
+        </div>
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+  <div class="container">
+    <div class="box">
+      <h2>Canelones</h2>
+      <div class="gallery">
+        <div id="carrito-container">
+          <a href="Carrito.html">
+            <button id="agregar-carrito-btn" onclick="agregarSeleccionadosAlCarrito()">
+              <img src="img/iconos/carrito/carrito-de-compras.png" alt="Agregar al carrito">
+              <span class="notification"></span>
+            </button>
+          </a>
+        </div>
+        <div class="product">
+          <img id="img1" src="img/pastas/canelones/canelones-de-carne-2.jpg" alt="Producto 1"
+            onclick="toggleSeleccion('img1', 'Producto 1', 105)">
+          <h3>Producto 1</h3>
+          <p class="price">$105</p>
+        </div>
+
+        <div class="product">
+          <img id="img2" src="img/pastas/canelones/CANELONES-min.webp" alt="Producto 2"
+            onclick="toggleSeleccion('img2', 'Producto 2', 95)">
+          <h3>Producto 2</h3>
+          <p class="price">$95</p>
+        </div>
+
+        <div class="product">
+          <img id="img3" src="img/pastas/canelones/209558.avif" alt="Producto 3"
+            onclick="toggleSeleccion('img3', 'Producto 3', 120)">
+          <h3>Producto 3</h3>
+          <p class="price">$120</p>
+        </div>
+
+
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+  <div class="container">
+    <div class="box">
+      <h2>Capellettis</h2>
+      <div class="gallery">
+        <div id="carrito-container">
+          <a href="Carrito.html">
+            <button id="agregar-carrito-btn" onclick="agregarSeleccionadosAlCarrito()">
+              <img src="img/iconos/carrito/carrito-de-compras.png" alt="Agregar al carrito">
+              <span class="notification"></span>
+            </button>
+          </a>
+        </div>
+        <div class="product">
+          <img id="img1" src="img/pastas/capellettis/capelettis.jpg" alt="Producto 1"
+            onclick="seleccionar('img1', 'Producto 1', 105)">
+          <h3>Producto 1</h3>
+          <p class="price">$105</p>
+        </div>
+
+        <div class="product">
+          <img id="img2" src="img/pastas/capellettis/capellettis.jpg" alt="Producto 2"
+            onclick="seleccionar('img2', 'Producto 2', 95)">
+          <h3>Producto 2</h3>
+          <p class="price">$95</p>
+        </div>
+
+        <div class="product">
+          <img id="img3" src="img/pastas/capellettis/D_NQ_NP_875566-MLA45374059743_032021-O.webp" alt="Producto 3"
+            onclick="seleccionar('img3', 'Producto 3', 120)">
+          <h3>Producto 3</h3>
+          <p class="price">$120</p>
+        </div>
+
+
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container">
+
+      </div>
+
+    </div>
+  </div> <!--container -->
+  <div class="container">
+    <div class="box">
+      <h2>Raviolones</h2>
+      <div class="gallery">
+        <div id="carrito-container">
+          <a href="Carrito.html">
+            <button id="agregar-carrito-btn" onclick="agregarSeleccionadosAlCarrito()">
+              <img src="img/iconos/carrito/carrito-de-compras.png" alt="Agregar al carrito">
+              <span class="notification"></span>
+            </button>
+          </a>
+        </div>
+        <div class="product">
+          <img id="img1" src="img/pastas/raviolones/interior-pasta-rellena-adobe-a.jpg.webp" alt="Producto 1"
+            onclick="toggleSeleccion('img1', 'Producto 1', 105)">
+          <h3>Producto 1</h3>
+          <p class="price">$105</p>
+        </div>
+
+        <div class="product">
+          <img id="img2" src="img/pastas/raviolones/maxresdefault.jpg" alt="Producto 2"
+            onclick="toggleSeleccion('img2', 'Producto 2', 95)">
+          <h3>Producto 2</h3>
+          <p class="price">$95</p>
+        </div>
+
+
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+  <div class="container">
+    <div class="box">
+      <h2>Sorrentinos</h2>
+      <div class="gallery">
+        <div id="carrito-container">
+          <a href="Carrito.html">
+            <button id="agregar-carrito-btn" onclick="agregarSeleccionadosAlCarrito()">
+              <img src="img/iconos/carrito/carrito-de-compras.png" alt="Agregar al carrito">
+              <span class="notification"></span>
+            </button>
+          </a>
+        </div>
+        <div class="product">
+          <img id="img1" src="img/pastas/sorrentinos/descarga.jpeg" alt="Producto 1"
+            onclick="toggleSeleccion('img1', 'Producto 1', 105)">
+          <h3>Producto 1</h3>
+          <p class="price">$105</p>
+        </div>
+
+        <div class="product">
+          <img id="img2"
+            src="img/pastas/sorrentinos/sorrentinos-caseros-de-espinaca-y-ricota-jamon-y-muzarella-D_NQ_NP_786153-MLA28153058163_092018-F.webp"
+            alt="Producto 2" onclick="toggleSeleccion('img2', 'Producto 2', 95)">
+          <h3>Producto 2</h3>
+          <p class="price">$95</p>
+        </div>
+
+        <div class="product">
+          <img id="img3" src="img/pastas/sorrentinos/sorrentinos-de-colores-remolacha-mangiare-la-pasta-fb.jpg"
+            alt="Producto 3" onclick="toggleSeleccion('img3', 'Producto 3', 120)">
+          <h3>Producto 3</h3>
+          <p class="price">$120</p>
+        </div>
+
+        <div class="product">
+          <img id="img4" src="img/pastas/sorrentinos/sorrentinos-rellenos.jpg" alt="Producto 4"
+            onclick="toggleSeleccion('img4', 'Producto 4', 110)">
+          <h3>Producto 4</h3>
+          <p class="price">$110</p>
+        </div>
+
+        <div class="product">
+          <img id="img5" src="img/pastas/sorrentinos/sorrentinos-veganos-29-1024x683.webp" alt="Producto 5"
+            onclick="toggleSeleccion('img5', 'Producto 5', 100)">
+          <h3>Producto 5</h3>
+          <p class="price">$100</p>
+        </div>
+        <!-- Agrega más imágenes aquí -->
+      </div>
+      <div id="seleccionados-container"></div>
+
+    </div>
+  </div> <!--container -->
+
+  
+
+  <footer>
+    <p>&copy; 2023 Tienda en línea. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    var productosSeleccionados = [];
+
+    document.addEventListener('DOMContentLoaded', function () {
+      productosSeleccionados = obtenerCarrito();
+      if (productosSeleccionados === null) {
+        productosSeleccionados = [];
+      }
+      //mostrarSeleccionados();
+    });
+
+    function obtenerCarrito() {
+      var carritoJSON = localStorage.getItem('productosSeleccionados');
+      if (carritoJSON) {
+        return JSON.parse(carritoJSON);
+      } else {
+        return { items: [] };
+      }
+    }
+
+    function mostrarSeleccionados() {
+      var carrito = obtenerCarrito();
+      var carritoHTML = '';
+
+      for (var i = 0; i < carrito.items.length; i++) {
+        var item = carrito.items[i];
+        carritoHTML += '<div>' + item.nombre + ' - $' + item.precio + ' - Cantidad: ' + item.cantidad + '</div>';
+      }
+
+      document.getElementById('seleccionados-container').innerHTML = carritoHTML;
+    }
+
+    function seleccionar(idImagen, nombre, precio) {
+      var imagen = document.getElementById(idImagen);
+      var index = productosSeleccionados.findIndex(function (producto) {
+        return producto.id === idImagen;
+      });
+
+      if (index === -1) {
+        productosSeleccionados.push({
+          id: idImagen,
+          nombre: nombre,
+          precio: precio
+        });
+        imagen.classList.add("selected");
+      } else {
+        productosSeleccionados.splice(index, 1);
+        imagen.classList.remove("selected");
+      }
+
+      contarSeleccionados();
+    }
+
+    function contarSeleccionados() {
+      var seleccionadosHTML = '';
+
+      for (var i = 0; i < productosSeleccionados.length; i++) {
+        var producto = productosSeleccionados[i];
+        seleccionadosHTML += '<div>' + producto.nombre + ' - $' + producto.precio + '</div>';
+      }
+
+      document.getElementById('seleccionados-container').innerHTML = seleccionadosHTML;
+
+      var notification = document.querySelector('.notification');
+      notification.style.display = 'none';
+
+      if (productosSeleccionados.length > 0) {
+        notification.style.display = 'block';
+        notification.innerText = productosSeleccionados.length;
+      } else {
+        notification.style.display = 'none';
+      }
+    }
+
+    function agregarAlCarritoJSON() {
+      var carrito = obtenerCarrito();
+
+      for (var i = 0; i < productosSeleccionados.length; i++) {
+        var producto = productosSeleccionados[i];
+
+        var item = {
+          nombre: producto.nombre,
+          precio: producto.precio,
+          cantidad: 1
+        };
+
+        carrito.items.push(item);
+      }
+
+      guardarSeleccion(carrito);
+      productosSeleccionados = [];
+      contarSeleccionados();
+      limpiarSeleccion();
+    }
+
+    function guardarSeleccion(carrito) {
+      var carritoJSON = JSON.stringify(carrito);
+      localStorage.setItem('productosSeleccionados', carritoJSON);
+    }
+
+    function limpiarSeleccion() {
+      var imagenes = document.getElementsByClassName('product');
+      for (var i = 0; i < imagenes.length; i++) {
+        imagenes[i].classList.remove('selected');
+      }
+      productosSeleccionados = []; // Limpiar la lista de productos seleccionados
+      contarSeleccionados();
+    }
+  </script>
+</body>
+
+</html>

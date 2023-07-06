@@ -1,0 +1,383 @@
+ head {
+   background-color: #333;
+   color: #fff;
+   padding: 10px;
+   text-align: center;
+ }
+
+ h1 {
+   margin: 0;
+ }
+
+ nav ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+ }
+
+ nav ul li {
+   display: inline;
+   margin-right: 10px;
+ }
+
+ nav ul li a {
+   color: #fff;
+   text-decoration: none;
+ }
+
+ #menu {
+   width: 900px;
+   height: 40px;
+   margin: 0 auto;
+   background: #868d5f;
+   border-radius: 10px;
+   border: #083018 solid 5px;
+ }
+
+ #menu ul {
+   margin: 0;
+   list-style: none;
+   line-height: normal;
+ }
+
+ #menu li {
+   display: inline;
+ }
+
+ #menu a {
+   display: inline;
+   float: left;
+   height: 26px;
+   padding: 14px 18px 0 20px;
+
+   text-transform: uppercase;
+   text-decoration: none;
+   font-weight: bold;
+
+ }
+
+ #menu a:hover {
+   text-decoration: underline;
+ }
+
+ #menu .first a {
+   padding-left: 0;
+   background: none;
+
+ }
+
+ /*id*/
+ #header {
+   height: 200px;
+   margin: 0 auto;
+   text-align: center;
+   font-family: 'sugaryvinegar';
+   font-size: large;
+ }
+
+ /* Header > Logo */
+
+ #logo {
+   float: center;
+   padding: 65px 0 0 0;
+   text-align: center;
+ }
+
+ #logo h1 {
+   /*text-transform: uppercase;*/
+   font-size: 3em;
+
+ }
+
+ #logo h2 {
+   margin: 0;
+   /*text-transform: uppercase;*/
+   font-size: 1.2em;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+
+ #logo a {
+   text-decoration: none;
+   color: black;
+
+ }
+
+ body {
+
+   /* el tipo de letra de be ser Arial */
+   /* El color de la letra para el body debe ser #999999 */
+   background-repeat: repeat;
+   background-position: center fixed;
+   background-size: cover fill;
+
+   background-image: url(/img/fondos/verde.jpg);
+   background-color: #083018;
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+
+ }
+
+ .gallery {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+ }
+
+ .gallery img {
+   border-radius: 10%;
+   max-width: 200px;
+   max-height: 200px;
+   width: auto;
+   height: auto;
+   margin: 10px;
+   /*border: solid 1px black; tambien le da color a la imagen de carrito*/
+
+ }
+
+ .gallery img:hover {
+   border-color: #ecac6c;
+   box-shadow: 0 0 5px rgba(235, 219, 42, 0.5);
+   border: 1px solid;
+   border-radius: 3px;
+   border-color: #ecac6c;
+   cursor: pointer;
+   border-radius: 10%;
+ }
+
+ .container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100vh;
+ }
+
+ .box {
+   width: 80%;
+   max-width: 800px;
+   height: 80%;
+   max-height: auto;
+   background-color: #868d5f;
+   border: #083018 solid 5px;
+   border-radius: 10px;
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+ }
+
+ .box h2 {
+   text-align: center;
+   margin: 0;
+   margin-bottom: 20px;
+ }
+
+
+ #agregar-carrito-btn {
+
+   margin-top: 20px;
+   background: none;
+   border: none;
+   /* transform: scaleX(-1);*/
+   position: fixed;
+   top: 10px;
+   right: 180px;
+   padding: 10px;
+   border-radius: 5px;
+ }
+
+ #agregar-carrito-btn img {
+   width: 200px;
+   height: 200px;
+ }
+
+ .notification {
+   position: absolute;
+   top: 25px;
+   right: 105px;
+   width: 40px;
+   height: 40px;
+   background-color: yellow;
+   color: black;
+   border-radius: 50%;
+   font-size: 34px;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   /*transform: scaleX(-1);*/
+ }
+
+ .referencia {
+   text-align: center;
+
+ }
+
+ .product {
+   text-align: center;
+
+ }
+
+ .product h3 {
+   margin: 10px 0;
+
+ }
+
+ .product .price {
+   font-weight: bold;
+ }
+
+ footer {
+   background-color: #333;
+   color: #fff;
+   padding: 20px;
+   text-align: center;
+   position: fixed;
+   justify-content: center;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   height: 10px;
+   display: flex;
+   align-items: center;
+ }
+
+ footer p {
+   font-size: 16px;
+ }
+
+ a {
+   color: #151f06;
+   font-style: bold;
+ }
+
+ .product .selected {
+   border: 2px solid blue;
+ }
+
+ .product img.selected {
+   border: 2px solid blue;
+   box-shadow: 0 0 5px blue;
+ }
+
+ #boton-container {
+   position: absolute;
+   top: 10px;
+   /* Ajusta la posición vertical */
+   right: 10px;
+   /* Ajusta la posición horizontal */
+ }
+
+
+ #btnScrollToTop {
+   display: none;
+   position: fixed;
+   bottom: 60px;
+   right: 20px;
+   width: 50px;
+   height: 50px;
+   background-color: #555;
+   color: #fff;
+   border: none;
+   border-radius: 50%;
+   cursor: pointer;
+   font-size: 24px;
+   text-align: center;
+   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+ }
+
+ #btnScrollToTop:hover {
+   background-color: #333;
+ }
+
+ #limpiar-carrito-btn {
+   background-color: #083018;
+   border: 1px solid #083018;
+   color: #333333;
+   padding: 8px 16px;
+   font-size: 14px;
+   cursor: pointer;
+   margin-right: 10px;
+   position: fixed;
+   top: 240px;
+   right: 240px;
+   z-index: 9999;
+   border-radius: 60%;
+    width: 100px; 
+    color: #868d5f;
+    font-weight: bold;
+ }
+
+ #limpiar-carrito-btn:hover {
+   background-color: #f2f2f2;
+ }
+
+ #carrito-imagen {
+   float: left;
+   margin-right: 10px;
+ }
+
+ @font-face {
+   font-family: 'sugaryvinegar';
+   src: url('/fonts/Sugar\ &\ Vinegar.ttf') format('woff2');
+ }
+
+ .item-carrito {
+   width: 200px;
+   margin: 10px;
+   background-color: #f2f2f2;
+   padding: 10px;
+   text-align: center;
+   border-radius: 10%;
+   border-style: solid;
+   border-color: #083018;
+ }
+
+ .item-carrito h3 {
+   color: #333;
+   font-size: 18px;
+   
+ }
+
+ .item-carrito p {
+   color: #999;
+   font-size: 14px;
+   
+ }
+
+ .cantidad-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+
+ .cantidad-container span {
+   margin: 0 10px;
+   width: 50px;
+   color: black;
+   
+  }
+
+ #seleccionados-container {
+   font-size: 18px;
+   font-weight: bold;
+   margin-top: 20px;
+   text-align: right;
+   color: #333;
+ }
+
+ /*
+ #lasagna{
+  background-image: url(/img/fondos/verdolaga.jpg);
+ }
+ #canelones{
+  background-image: url(/img/fondos/vverdecito.jpg);
+ }
+ #raviolones{
+  background-image: url(/img/fondos/verdolaga.jpg);
+ }
+ #sorrentinos{
+  background-image: url(/img/fondos/vverdecito.jpg);
+ }*/
